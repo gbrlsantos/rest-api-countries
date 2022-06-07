@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 
 import Home from './Home';
-import Country from './Country';
+import CountryDetails from './CountryDetails';
 
 const Pages = () => {
     return(
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route path="/country" element={<Country />} />
+                <Route path="/country/:id" element={<CountryDetails />} />
             </ Routes>
         </BrowserRouter>
     );

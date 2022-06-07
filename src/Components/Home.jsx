@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Error from './Error';
 import Loading from './Loading';
+import Country from './Country';
 
 const Home = () => {
     const [error, setError] = useState(null);
@@ -35,9 +37,13 @@ const Home = () => {
         return(
             <ul>
                 {countries.map(country => (
-                    <li key={country.id}>
-                        {country.name.common}
-                    </li>
+                    <Country 
+                        cca2={country.cca2}
+                        name={country.name.common}
+                        population={country.population}
+                        region={country.region}
+                        capital={country.capital}
+                    />
                 ))}
             </ul>
         )
