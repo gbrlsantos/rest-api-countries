@@ -16,7 +16,9 @@ const Home = () => {
                 (data) => {
                     setIsLoaded(true);
                     setCountries(data);
-                },
+                }
+            )
+            .catch(
                 (error) => {
                     setIsLoaded(false);
                     setError(error);
@@ -38,7 +40,7 @@ const Home = () => {
             <ul>
                 {countries.map(country => (
                     <Country 
-                        cca2={country.cca2}
+                        id={country.cca2}
                         name={country.name.common}
                         population={country.population}
                         region={country.region}
