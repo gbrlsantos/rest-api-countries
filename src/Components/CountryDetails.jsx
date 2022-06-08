@@ -42,17 +42,15 @@ const CountryDetails = () => {
         return(
             <div key={id}>
                 <div>
+                    <img alt={countryDetails.name.common + " Flag"} src={countryDetails.flags.svg}></img>
                     <h3>{countryDetails.name.common}</h3>
-                    <p><span>Native name: </span></p>
                     <p><span>Population: </span>{countryDetails.population}</p>
                     <p><span>Region: </span>{countryDetails.region}</p>
                     <p><span>Subregion: </span>{countryDetails.subregion}</p>
                     <p><span>Capital: </span>{countryDetails.capital}</p>
                 </div>
                 <div>
-                    <p><span>Top Level Domain: </span>{countryDetails.tld}</p>
-                    <p><span>Currencies: </span></p>
-                    <p><span>Languages: </span></p>
+                    <p><span>Top Level Domain: </span>{countryDetails.tld[0]}</p>
                 </div>
             </div>
         )

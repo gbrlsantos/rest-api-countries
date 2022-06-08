@@ -45,6 +45,7 @@ const Home = () => {
                         population={country.population}
                         region={country.region}
                         capital={country.capital}
+                        flag={country.flags.svg}
                     />
                 ))}
             </ul>
