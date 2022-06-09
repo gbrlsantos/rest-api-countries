@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import Error from './Error';
 import Loading from './Loading';
 import Country from './Country';
+import SearchBar from './SearchBar';
+
+const SearchContext = React.createContext("");
+
+/* styled components */
+const CountriesList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 60px;
+    justify-content: center;
+`
+
+const FilterSection = styled.div`
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+`
 
 const Home = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+
     const [countries, setCountries] = useState([]);
 
     useEffect(() => {
@@ -37,18 +57,23 @@ const Home = () => {
     }
     else {
         return(
-            <ul>
-                {countries.map(country => (
-                    <Country 
-                        id={country.cca2}
-                        name={country.name.common}
-                        population={country.population}
-                        region={country.region}
-                        capital={country.capital}
-                        flag={country.flags.svg}
-                    />
-                ))}
-            </ul>
+            <main>
+                <FilterSection>
+                    <SearchBar/>
+                </FilterSection>
+                <CountriesList>
+                    {countries.map(country => (
+                        <Country 
+                            id={country.cca2}
+                            name={country.name.common}
+                            population={country.population}
+                            region={country.region}
+                            capital={country.capital}
+                            flag={country.flags.png}
+                        />
+                    ))}
+                </CountriesList>
+            </main>
         )
     }
 }
