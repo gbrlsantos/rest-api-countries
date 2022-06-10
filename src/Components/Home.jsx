@@ -8,6 +8,8 @@ import SearchBar from './SearchBar';
 import FilterSelect from './FilterSelect';
 
 import { useSearch } from '../Context/Search';
+import { useRegionFilter } from '../Context/RegionFilter';
+
 
 /* styled components */
 const CountriesList = styled.div`
@@ -32,6 +34,9 @@ const Home = () => {
     const [countries, setCountries] = useState([]);
 
     const { searchValue } = useSearch()
+    const { region } = useRegionFilter()
+
+    console.log(region)
 
     useEffect(() => {
         fetch("https://restcountries.com/v3.1/all")
@@ -68,8 +73,9 @@ const Home = () => {
                 </FilterSection>
                 <CountriesList>
                     {countries.filter((val)=> {
-                        if (!searchValue || val.name.common.toLowerCase().includes(searchValue.toLowerCase())) 
-                            return val
+                        if (!searchValue || val.name.common.toLowerCase().includes(searchValue.toLowerCase()))
+                            if (!region || val.region.toLowerCase() === region)
+                                return val
                         return null
                     }).map(country => (
                         <Country 
