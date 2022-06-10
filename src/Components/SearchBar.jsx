@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearch } from '../Context/Search';
 
 const SearchBar = () => {
-    const [searchValue, setSearchValue] = useState("");
-    const [searchParam] = useState(["capital", "name"])
+    const { searchValue, setSearchValue } = useSearch()
 
     return(
         <div>

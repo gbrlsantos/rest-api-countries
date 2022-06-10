@@ -6,7 +6,7 @@ import Loading from './Loading';
 import Country from './Country';
 import SearchBar from './SearchBar';
 
-const SearchContext = React.createContext("");
+import { useSearch } from '../Context/Search';
 
 /* styled components */
 const CountriesList = styled.div`
@@ -28,6 +28,8 @@ const Home = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const [countries, setCountries] = useState([]);
+
+    const { searchValue, setSearchValue } = useSearch()
 
     useEffect(() => {
         fetch("https://restcountries.com/v3.1/all")
@@ -56,13 +58,16 @@ const Home = () => {
         )
     }
     else {
-        return(
+        return( 
             <main>
                 <FilterSection>
                     <SearchBar/>
                 </FilterSection>
                 <CountriesList>
-                    {countries.map(country => (
+                    {countries.filter((val)=> {
+                        if (!searchValue || val.name.common.toLowerCase().includes(searchValue.toLowerCase())) 
+                            return val
+                    }).map(country => (
                         <Country 
                             id={country.cca2}
                             name={country.name.common}
