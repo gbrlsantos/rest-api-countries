@@ -5,6 +5,7 @@ import Error from './Error';
 import Loading from './Loading';
 import Country from './Country';
 import SearchBar from './SearchBar';
+import FilterSelect from './FilterSelect';
 
 import { useSearch } from '../Context/Search';
 
@@ -18,6 +19,7 @@ const CountriesList = styled.div`
 
 const FilterSection = styled.div`
     display: flex;
+    justify-content: space-between;
     width: 80%;
     margin: 0 auto;
     padding-bottom: 20px;
@@ -29,7 +31,7 @@ const Home = () => {
 
     const [countries, setCountries] = useState([]);
 
-    const { searchValue, setSearchValue } = useSearch()
+    const { searchValue } = useSearch()
 
     useEffect(() => {
         fetch("https://restcountries.com/v3.1/all")
@@ -62,11 +64,13 @@ const Home = () => {
             <main>
                 <FilterSection>
                     <SearchBar/>
+                    <FilterSelect/>
                 </FilterSection>
                 <CountriesList>
                     {countries.filter((val)=> {
                         if (!searchValue || val.name.common.toLowerCase().includes(searchValue.toLowerCase())) 
                             return val
+                        return null
                     }).map(country => (
                         <Country 
                             id={country.cca2}
