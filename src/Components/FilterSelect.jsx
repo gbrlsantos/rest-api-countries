@@ -1,22 +1,32 @@
-import React from 'react';
-import Select from '@mui/material/Select';
+import React, { useState } from 'react';
 
-const options = [
-    {value: 'africa', label: 'Africa'},
-    {value: 'america', label: 'America'},
-    {value: 'asia', label: 'Asia'},
-    {value: 'europe', label: 'Europe'},
-    {value: 'oceania', label: 'Oceania'},
-]
+/* context */
+import { useRegionFilter } from '../Context/RegionFilter';
+
+/* material ui */
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 const FilterSelect = () => {
+    const { region, setRegion } = useRegionFilter()
+    const handleRegionChange = (e) => {
+        setRegion(e.target.value)
+    }
     return(
         <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Filter by Region"
-            options={options}
-        />
+            displayEmpty
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={region}
+            onChange={handleRegionChange}
+        >
+            <MenuItem value="">Filter by Region</MenuItem>
+            <MenuItem value={"africa"}>Africa</MenuItem>
+            <MenuItem value={"america"}>America</MenuItem>
+            <MenuItem value={"asia"}>Asia</MenuItem>
+            <MenuItem value={"europe"}>Europe</MenuItem>
+            <MenuItem value={"oceania"}>Oceania</MenuItem>
+        </Select>
     )
 }
 
